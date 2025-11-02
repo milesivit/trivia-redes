@@ -1,0 +1,134 @@
+/* === Estilo general === */
+body {
+  background: linear-gradient(135deg, #0a0f24, #182848);
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px 10px;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #00eaff;
+  text-shadow: 0 0 10px #00eaff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+h2, h3 {
+  text-align: center;
+}
+
+/* === Contenedores === */
+#join, #game {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px; /* Ajuste máximo en pantallas grandes */
+  box-shadow: 0 0 20px rgba(0, 234, 255, 0.3);
+  animation: fadeIn 0.6s ease;
+  box-sizing: border-box;
+}
+
+/* === Inputs y botones === */
+input {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  margin: 10px 0;
+  font-size: 1rem;
+  outline: none;
+  background-color: rgba(255,255,255,0.9);
+  color: #333;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #00eaff;
+  border: none;
+  border-radius: 10px;
+  color: #0a0f24;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin: 5px 0;
+}
+
+button:hover { background: #00bcd4; }
+button:disabled { background: #555; cursor: not-allowed; }
+
+/* === Puntajes === */
+#players {
+  background: rgba(0,0,0,0.3);
+  border-radius: 10px;
+  padding: 10px;
+  font-family: "Consolas", monospace;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  margin-top: 10px;
+}
+
+.player {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  margin-bottom: 6px;
+}
+
+.player:nth-child(odd) { background: rgba(255,255,255,0.15); }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* === Media Queries para móviles === */
+@media (max-width: 480px) {
+  body {
+    padding: 10px 5px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  #join, #game {
+    padding: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  input, button {
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  #players {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+}
+

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Trivia Redes — Cliente Servidor</title>
+<script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<h1>📡Trivia de Redes (2 jugadores)📶</h1>
+
+<!-- Sección de unión -->
+<div id="join">
+    <input id="name" placeholder="Tu nombre">
+    <button onclick="join()">Unirse</button>
+</div>
+
+<!-- Sección de juego -->
+<div id="game" style="display:none;">
+    <h2 id="question">Esperando inicio...</h2>
+    <div id="options"></div>
+    <h3>Puntajes:</h3>
+    <div id="players"></div>
+</div>
+
+<script>
+const socket = io();
+let myName = "";
+
+// Función para unirse
+function join() {
+    myName = document.getElementById("name").value;
+    if (!myName) return alert("Ingresá tu nombre");
+    socket.emit("join", { name: myName });
+    document.getElementById("join").style.display = "none";
+    document.getElementById("game").style.display = "block";
+}
+
+// Mostrar pregunta y generar botones
+function showQuestion(q) {
+    document.getElementById("question").innerText = q.q;
+    const optionsContainer = document.getElementById("options");
+    optionsContainer.innerHTML = "";
+    q.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.innerText = option;
+        btn.onclick = () => sendAnswer(option);
+        optionsContainer.appendChild(btn);
+    });
+}
+
+// Enviar respuesta al servidor
+function sendAnswer(answer) {
+    socket.emit("answer", { answer });
+    // Deshabilitar botones después de responder
+    document.querySelectorAll("#options button").forEach(b => b.disabled = true);
+}
+
+// Actualizar lista de jugadores y puntajes
+socket.on("player_list", (data) => {
+    const container = document.getElementById("players");
+    container.innerHTML = "";
+    data.forEach(p => {
+        const div = document.createElement("div");
+        div.classList.add("player");
+        div.innerHTML = `<span>${p.name}</span><span>${p.score} pts</span>`;
+        container.appendChild(div);
+    });
+});
+
+// Eventos del juego
+socket.on("start_game", (q) => { showQuestion(q); });
+socket.on("next_question", (q) => { showQuestion(q); });
+socket.on("game_over", (scores) => {
+    let text = "🏁 Juego terminado\n";
+    scores.sort((a, b) => b.score - a.score);
+    text += scores.map(p => `${p.name}: ${p.score}`).join("\n");
+    alert(text);
+});
+</script>
+</body>
+</html>
