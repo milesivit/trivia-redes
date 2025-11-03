@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proyecto — Trivia de Redes</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <span class="logo">📡 Trivia de Redes</span>
+    <ul class="nav-links">
+      <li><a href="{{ url_for('index') }}">Inicio</a></li>
+      <li><a href="{{ url_for('proyecto') }}" class="active">Proyecto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="project">
+  <h1>🧩 Proyecto: Trivia de Redes — Cliente Servidor</h1>
+
+  <section>
+    <h2>Alumno/a:</h2>
+    <p><strong>Milena Sivit</strong></p>
+
+    <h2>Tema:</h2>
+    <p>Implementación de servidor–cliente con Flask y Socket.IO + Apertura de puerto</p>
+
+    <h2>Introducción</h2>
+    <p>Se desarrolló un sistema cliente-servidor tipo trivia donde dos jugadores se conectan mediante Socket.IO. El servidor maneja las preguntas, respuestas y puntajes.</p>
+
+    <h2>Requisitos</h2>
+    <ul>
+      <li>Python 3</li>
+      <li>Flask</li>
+      <li>Flask-SocketIO</li>
+      <li>Navegador web</li>
+      <li>Router con reenvío de puertos TCP 5010</li>
+      <li>Regla de firewall configurada</li>
+    </ul>
+
+    <h2>Configuración del router</h2>
+    <p>Se accedió al panel de administración (http://192.168.0.1) y se configuró el servicio <strong>servidorweb</strong>:</p>
+    <pre>
+Tipo: TCP
+Puerto interno/inicial/final: 5010
+IP local: 192.168.0.188
+    </pre>
+
+    <p>La IP local se obtuvo con <code>ipconfig /all</code> y la IP pública en <a href="https://whatismyipaddress.com/es/mi-ip" target="_blank">whatismyipaddress.com</a>.</p>
+
+    <h2>Firewall</h2>
+    <p>Se creó una regla de entrada en el puerto 5010 para permitir tráfico hacia el servidor Flask.</p>
+
+    <h2>Prueba de funcionamiento</h2>
+    <p>Se ejecuta el servidor con <code>python server.py</code>. Luego, desde otra PC o mediante la IP pública (p. ej. <strong>181.228.197.132:5010</strong>), se accede al juego.</p>
+
+    <h2>Conclusión</h2>
+    <p>El proyecto demuestra la comunicación cliente-servidor mediante sockets, la apertura de puertos y la correcta configuración del firewall. El juego funciona tanto en red local como externamente.</p>
+
+    <h2>Repositorio</h2>
+    <p><a href="https://github.com/milesivit/trivia-redes" target="_blank">https://github.com/milesivit/trivia-redes</a></p>
+  </section>
+</main>
+
+<footer>
+  <p>💻<strong>Milena Sivit</strong> — 2025</p>
+</footer>
+
+</body>
+</html>

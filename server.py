@@ -13,6 +13,10 @@ current_question = 0
 questions = [
     {"q": "¿Qué protocolo usa un cliente web para comunicarse con un servidor?",
      "options": ["HTTP", "FTP", "SMTP", "DNS"], "a": "HTTP"},
+    {"q": "Observa la siguiente imagen: ¿Qué representa esta figura?",
+    "options": ["Ondas estacionarias", "Antena dipolo", "Zona de Fresnel", "Interferencia constructiva"], "a": "Zona de Fresnel",
+    "img": "/static/img/fresnel.svg"
+    },
     {"q": "¿Qué comando puedes usar en tu PC para ver puertos abiertos (conexiones/puertos en escucha)?",
      "options": ["ss -tuln", "netstat -an", "lsof -i -P -n", "Get-NetTCPConnection"], "a": "netstat -an"},
     {"q": "¿Qué puerto usa HTTP por defecto?",
@@ -33,6 +37,10 @@ questions = [
 @app.route("/")
 def index():
     return render_template("index.html")
+
+@app.route('/proyecto')
+def proyecto():
+    return render_template('proyecto.html')
 
 
 @socketio.on('join')
